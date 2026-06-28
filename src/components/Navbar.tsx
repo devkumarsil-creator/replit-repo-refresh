@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link, useLocation } from 'wouter';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { Brain, Menu, X, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
@@ -9,7 +9,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +54,7 @@ export function Navbar() {
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <Button className="rounded-full px-6" onClick={() => navigate('/start-assessment')}>Get Started</Button>
+            <Button className="rounded-full px-6" onClick={() => navigate({ to: '/start-assessment' })}>Get Started</Button>
           </div>
         </nav>
 
@@ -91,7 +91,7 @@ export function Navbar() {
           <Link href="#features" className="text-base font-medium py-2 border-b border-border/50">
             Features
           </Link>
-          <Button className="w-full mt-4" onClick={() => { navigate('/start-assessment'); setMobileMenuOpen(false); }}>Get Started</Button>
+          <Button className="w-full mt-4" onClick={() => { navigate({ to: '/start-assessment' }); setMobileMenuOpen(false); }}>Get Started</Button>
         </motion.div>
       )}
     </header>
