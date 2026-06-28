@@ -9,38 +9,87 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StartAssessmentRouteImport } from './routes/start-assessment'
+import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResultsProfileRouteImport } from './routes/results.$profile'
 
+const StartAssessmentRoute = StartAssessmentRouteImport.update({
+  id: '/start-assessment',
+  path: '/start-assessment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssessmentRoute = AssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResultsProfileRoute = ResultsProfileRouteImport.update({
+  id: '/results/$profile',
+  path: '/results/$profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assessment': typeof AssessmentRoute
+  '/start-assessment': typeof StartAssessmentRoute
+  '/results/$profile': typeof ResultsProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assessment': typeof AssessmentRoute
+  '/start-assessment': typeof StartAssessmentRoute
+  '/results/$profile': typeof ResultsProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assessment': typeof AssessmentRoute
+  '/start-assessment': typeof StartAssessmentRoute
+  '/results/$profile': typeof ResultsProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/assessment' | '/start-assessment' | '/results/$profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/assessment' | '/start-assessment' | '/results/$profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/assessment'
+    | '/start-assessment'
+    | '/results/$profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssessmentRoute: typeof AssessmentRoute
+  StartAssessmentRoute: typeof StartAssessmentRoute
+  ResultsProfileRoute: typeof ResultsProfileRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/start-assessment': {
+      id: '/start-assessment'
+      path: '/start-assessment'
+      fullPath: '/start-assessment'
+      preLoaderRoute: typeof StartAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assessment': {
+      id: '/assessment'
+      path: '/assessment'
+      fullPath: '/assessment'
+      preLoaderRoute: typeof AssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +97,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/results/$profile': {
+      id: '/results/$profile'
+      path: '/results/$profile'
+      fullPath: '/results/$profile'
+      preLoaderRoute: typeof ResultsProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssessmentRoute: AssessmentRoute,
+  StartAssessmentRoute: StartAssessmentRoute,
+  ResultsProfileRoute: ResultsProfileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
