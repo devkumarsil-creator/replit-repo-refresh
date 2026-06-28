@@ -2,11 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLocation } from 'wouter';
+import { useNavigate } from '@tanstack/react-router';
 
 
 export function FinalCTA() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   return (
     <section className="py-32 bg-primary relative overflow-hidden text-primary-foreground">
       {/* Background visual texture */}
@@ -49,7 +49,7 @@ export function FinalCTA() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <Button size="lg" className="h-16 px-10 text-lg bg-background text-foreground hover:bg-background/90 shadow-2xl group" onClick={() => navigate('/start-assessment')}>
+          <Button size="lg" className="h-16 px-10 text-lg bg-background text-foreground hover:bg-background/90 shadow-2xl group" onClick={() => navigate({ to: '/start-assessment' })}>
             Take the Assessment
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>

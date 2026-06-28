@@ -2,11 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLocation } from 'wouter';
+import { useNavigate } from '@tanstack/react-router';
 
 
 export function Hero() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Background decorations */}
@@ -41,7 +41,7 @@ export function Hero() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="h-14 px-8 text-base shadow-xl shadow-primary/20 group" onClick={() => navigate('/start-assessment')}>
+              <Button size="lg" className="h-14 px-8 text-base shadow-xl shadow-primary/20 group" onClick={() => navigate({ to: '/start-assessment' })}>
                 Start Free Assessment
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>

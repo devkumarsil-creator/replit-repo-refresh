@@ -1,6 +1,6 @@
 import React from 'react';
 import { Brain, Twitter, Linkedin, Github, Facebook } from 'lucide-react';
-import { Link } from 'wouter';
+import { Link } from '@tanstack/react-router';
 
 export function Footer() {
   return (
