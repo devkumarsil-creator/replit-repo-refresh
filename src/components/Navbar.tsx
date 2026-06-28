@@ -28,7 +28,7 @@ export function Navbar() {
       }`}
     >
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-2 group">
           <div className="bg-primary text-primary-foreground p-1.5 rounded-lg group-hover:scale-105 transition-transform">
             <Brain className="w-5 h-5" />
           </div>
@@ -37,15 +37,15 @@ export function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             How It Works
-          </Link>
-          <Link href="#types" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          </a>
+          <a href="#types" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Types
-          </Link>
-          <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          </a>
+          <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Features
-          </Link>
+          </a>
           <div className="flex items-center gap-4 ml-4">
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -82,15 +82,15 @@ export function Navbar() {
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden absolute top-20 left-0 w-full bg-background border-b border-border shadow-lg py-4 px-6 flex flex-col gap-4"
         >
-          <Link href="#how-it-works" className="text-base font-medium py-2 border-b border-border/50">
+          <a href="#how-it-works" className="text-base font-medium py-2 border-b border-border/50">
             How It Works
-          </Link>
-          <Link href="#types" className="text-base font-medium py-2 border-b border-border/50">
+          </a>
+          <a href="#types" className="text-base font-medium py-2 border-b border-border/50">
             Types
-          </Link>
-          <Link href="#features" className="text-base font-medium py-2 border-b border-border/50">
+          </a>
+          <a href="#features" className="text-base font-medium py-2 border-b border-border/50">
             Features
-          </Link>
+          </a>
           <Button className="w-full mt-4" onClick={() => { navigate({ to: '/start-assessment' }); setMobileMenuOpen(false); }}>Get Started</Button>
         </motion.div>
       )}

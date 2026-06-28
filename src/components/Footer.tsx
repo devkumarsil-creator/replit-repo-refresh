@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 group mb-6 inline-flex">
+            <Link to="/" className="flex items-center gap-2 group mb-6 inline-flex">
               <div className="bg-primary text-primary-foreground p-1.5 rounded-lg">
                 <Brain className="w-5 h-5" />
               </div>
@@ -36,9 +36,9 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-foreground mb-6">Platform</h4>
             <ul className="space-y-4">
-              <li><Link href="#how-it-works" className="text-muted-foreground hover:text-primary transition-colors">How it Works</Link></li>
-              <li><Link href="#types" className="text-muted-foreground hover:text-primary transition-colors">Personality Types</Link></li>
-              <li><Link href="#features" className="text-muted-foreground hover:text-primary transition-colors">Premium Features</Link></li>
+              <li><a href="#how-it-works" className="text-muted-foreground hover:text-primary transition-colors">How it Works</a></li>
+              <li><a href="#types" className="text-muted-foreground hover:text-primary transition-colors">Personality Types</a></li>
+              <li><a href="#features" className="text-muted-foreground hover:text-primary transition-colors">Premium Features</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Research Methodology</a></li>
             </ul>
           </div>
