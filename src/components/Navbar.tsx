@@ -3,12 +3,15 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { Brain, Menu, X, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTheme } from 'next-themes';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const [theme, setThemeState] = useState<'light' | 'dark'>('light');
+  const setTheme = (t: 'light' | 'dark') => {
+    setThemeState(t);
+    if (typeof document !== 'undefined') document.documentElement.classList.toggle('dark', t === 'dark');
+  };
   const navigate = useNavigate();
 
   useEffect(() => {
