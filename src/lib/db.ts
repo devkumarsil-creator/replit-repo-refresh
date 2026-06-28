@@ -93,7 +93,7 @@ export async function saveResult(
     supabase.from('assessment_results').insert({
       session_id: sessionId,
       profile_code: profileCode,
-      scores: scores as unknown as Record<string, unknown>,
+      scores: scores as never,
     }),
     supabase
       .from('assessment_sessions')
