@@ -14,7 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      assessment_answers: {
+        Row: {
+          answered_at: string
+          id: string
+          question_id: number
+          session_id: string
+          value: number
+        }
+        Insert: {
+          answered_at?: string
+          id?: string
+          question_id: number
+          session_id: string
+          value: number
+        }
+        Update: {
+          answered_at?: string
+          id?: string
+          question_id?: number
+          session_id?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_answers_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_results: {
+        Row: {
+          created_at: string
+          id: string
+          profile_code: string
+          scores: Json
+          session_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          profile_code: string
+          scores: Json
+          session_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          profile_code?: string
+          scores?: Json
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_results_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_sessions: {
+        Row: {
+          completed_at: string | null
+          id: string
+          started_at: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          id?: string
+          started_at?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          id?: string
+          started_at?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_users: {
+        Row: {
+          age: number | null
+          country: string | null
+          created_at: string
+          email: string
+          gender: string | null
+          id: string
+          name: string
+          occupation: string | null
+        }
+        Insert: {
+          age?: number | null
+          country?: string | null
+          created_at?: string
+          email: string
+          gender?: string | null
+          id?: string
+          name: string
+          occupation?: string | null
+        }
+        Update: {
+          age?: number | null
+          country?: string | null
+          created_at?: string
+          email?: string
+          gender?: string | null
+          id?: string
+          name?: string
+          occupation?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
