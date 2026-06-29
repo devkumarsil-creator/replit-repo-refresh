@@ -1,7 +1,14 @@
 import { createStart, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
-import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
+
+// NOTE: The generated `attachSupabaseAuth` middleware is intentionally NOT
+// registered here. It imports the browser Supabase client at module scope,
+// which touches `localStorage` during SSR and crashes the server entry.
+// This app has no server functions that use `requireSupabaseAuth`, so no
+// bearer middleware is needed. If you add one later, write a project-specific
+// `functionMiddleware` that reads the session lazily inside the .client()
+// handler instead of re-adding the generated attacher.
 
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {
@@ -19,6 +26,6 @@ const errorMiddleware = createMiddleware().server(async ({ next }) => {
 });
 
 export const startInstance = createStart(() => ({
-  functionMiddleware: [attachSupabaseAuth],
+  functionMiddleware: [],
   requestMiddleware: [errorMiddleware],
 }));
